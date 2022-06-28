@@ -1,0 +1,29 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        stable: false
+        go-version: 1.18.0-beta1
+
+    - name: Tidy
+      run: go mod tidy
+
+    - name: Vendor
+      run: go mod vendor
+
+    - name: Test
+      run: go test -v ./...
