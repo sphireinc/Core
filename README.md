@@ -1,5 +1,5 @@
 # Sphire Eroc
-The core of all Sphire projects. Based off of Fiber.
+Eroc is a framework which allows for fast API prototyping. Based off of Fiber.
 
 ## Setup
 
