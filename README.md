@@ -1,9 +1,9 @@
-# Sphire Eroc
-Eroc is a framework which allows for fast API prototyping. Based off of Fiber.
+# Sphire Core
+Core is a framework which allows for fast API prototyping. Based off of Fiber.
 
 ## Setup
 
-The (pun fully intended) *core* of Sphire Eroc is the `Config` struct. This is the entrypoint
+The (pun fully intended) *core* of Sphire Core is the `Config` struct. This is the entrypoint
 of the framework, and must be instantiated as follows:
 
     var App core.Config = core.New()
@@ -35,7 +35,7 @@ That is all that is required.
 
 ## Routing
 
-Routing in Eroc is simple. We create a function with this signature:
+Routing in Core is simple. We create a function with this signature:
 
     func handler(ctx *routing.Context) error {
         body := mantisHttp.Response{}
