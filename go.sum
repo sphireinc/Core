@@ -70,16 +70,6 @@ github.com/spf13/cast v1.1.0/go.mod h1:r2rcYCSwa1IExKTDiTfzaxqT2FNHs8hODu4LnUfgK
 github.com/spf13/jwalterweatherman v0.0.0-20170901151539-12bd96e66386/go.mod h1:cQK4TGJAtQXfYWX+Ddv3mKDzgVb68N+wFjFa4jdeBTo=
 github.com/spf13/pflag v1.0.1-0.20170901120850-7aff26db30c1/go.mod h1:DYY7MBk1bdzusC3SYhjObp+wFpr4gzcvqqNjLnInEg4=
 github.com/spf13/viper v1.0.0/go.mod h1:A8kyI5cUJhb8N+3pkfONlcEcZbueH6nhAm0Fq7SrnBM=
-github.com/sphireinc/mantis v1.3.0 h1:hV+xeROG3PHOKyO1rC/Jp6dtzmQJabH193146vUtMxQ=
-github.com/sphireinc/mantis v1.3.0/go.mod h1:jvPtl4hLnWANIWygnJHWjPJ1PPQPKk43CBB+mEhLm8A=
-github.com/sphireinc/mantis v1.3.1 h1:lDeTc/4ECT3SGZcrdwbOuhxS8uRhFc5kDOvuHm+67fg=
-github.com/sphireinc/mantis v1.3.1/go.mod h1:jvPtl4hLnWANIWygnJHWjPJ1PPQPKk43CBB+mEhLm8A=
-github.com/sphireinc/mantis v1.3.2 h1:wi90MwfOJIm3bx9kq8TwPg1v0KNqPnfKyHThgGxw55Y=
-github.com/sphireinc/mantis v1.3.2/go.mod h1:jvPtl4hLnWANIWygnJHWjPJ1PPQPKk43CBB+mEhLm8A=
-github.com/sphireinc/mantis v1.3.3 h1:IcJJaHSQPkBXc/H62Kc5xHaE7nhLYpX0wBd+gMsBBpg=
-github.com/sphireinc/mantis v1.3.3/go.mod h1:jvPtl4hLnWANIWygnJHWjPJ1PPQPKk43CBB+mEhLm8A=
-github.com/sphireinc/mantis v1.3.4 h1:vVnhMknNp2Vrk/dbFLVq1MurSkBMQi8UX/+J5YE0j00=
-github.com/sphireinc/mantis v1.3.4/go.mod h1:jvPtl4hLnWANIWygnJHWjPJ1PPQPKk43CBB+mEhLm8A=
 github.com/sphireinc/mantis v1.3.5 h1:yk+YNeNVBO0qC26T5xA2hlYYaCtfpPvl7+Rhsh9vyBk=
 github.com/sphireinc/mantis v1.3.5/go.mod h1:jvPtl4hLnWANIWygnJHWjPJ1PPQPKk43CBB+mEhLm8A=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=

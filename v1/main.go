@@ -2,8 +2,9 @@ package core
 
 import (
 	"encoding/json"
+	routing "github.com/qiangxue/fasthttp-routing"
 	"github.com/valyala/fasthttp"
-	"io/ioutil"
+	"os"
 )
 
 type Config struct {
@@ -15,11 +16,12 @@ type Config struct {
 	Environment   Environment   `json:"environment"`
 	Persistence   Persistence   `json:"persistence"`
 	Communication Communication `json:"communication"`
+	Context       *routing.Context
 }
 
 // Load takes our Config object and loads our environment defined JSON config
 func (c *Config) Load() {
-	file, err := ioutil.ReadFile(c.Environment.Location)
+	file, err := os.ReadFile(c.Environment.Location)
 	if err != nil {
 		panic("Cannot load config file " + c.Environment.Location)
 	}

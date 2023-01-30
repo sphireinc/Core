@@ -22,7 +22,7 @@ The framework can run in the simple runner:
     package main
     
     import (
-        core "github.com/sphireinc/core/src"
+        core "github.com/sphireinc/core/v1"
     )
 
     var App := core.New()

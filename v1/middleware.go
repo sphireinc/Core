@@ -22,7 +22,8 @@ func AdminOnly(ctx *routing.Context) error {
 }
 
 // LogRequest provides a log middleware which logs each request.
-//   Forced middleware
+//
+//	Forced middleware
 func LogRequest(ctx *routing.Context) error {
 	App.Log.Writer.Info(fmt.Sprintf("%s %s",
 		ctx.RequestCtx.RemoteAddr(),
@@ -35,7 +36,7 @@ func LogRequest(ctx *routing.Context) error {
 func BasicHeaders(ctx *routing.Context) error {
 	ctx.Response.Header.Set("Content-Type", "application/json")
 	ctx.Response.Header.Set("Accept", "*/*")
-	ctx.Response.Header.Set("Accept-Encoding", "gzip, deflate, sdch, br")
+	ctx.Response.Header.Set("Accept-Encoding", "gzip, compress, deflate, br")
 	ctx.Response.Header.Set("Accept-Language", "en-US,en;q=0.8")
 	ctx.Response.Header.Set("Connection", "keep-alive")
 	ctx.Response.Header.Set("Cache-Control", "no-cache")

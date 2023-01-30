@@ -5,7 +5,6 @@ go 1.18
 require (
 	github.com/qiangxue/fasthttp-routing v0.0.0-20160225050629-6ccdc2a18d87
 	github.com/sphireinc/mantis v1.3.5
-	github.com/stretchr/testify v1.7.1
 	github.com/valyala/fasthttp v1.35.0
 	github.com/victorspringer/http-cache v0.0.0-20220131145941-ef3624e6666f
 )
@@ -27,6 +26,7 @@ require (
 	github.com/kr/text v0.2.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rogpeppe/go-internal v1.8.1 // indirect
+	github.com/stretchr/testify v1.7.1 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	gopkg.in/jmcvetta/napping.v3 v3.2.0 // indirect
 	gopkg.in/jmcvetta/neoism.v1 v1.3.1 // indirect

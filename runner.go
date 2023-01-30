@@ -1,9 +1,8 @@
 package main
 
 import (
-	routing "github.com/qiangxue/fasthttp-routing"
-	core "github.com/sphireinc/core/src"
-	mantisHttp "github.com/sphireinc/mantis/http"
+	"github.com/sphireinc/core/v1"
+	mantis "github.com/sphireinc/mantis/http"
 )
 
 var App = core.New()
@@ -18,13 +17,13 @@ func main() {
 	App.Run()
 }
 
-func handler(ctx *routing.Context) error {
-	body := mantisHttp.Response{
+func handler(ctx App.Context) error {
+	body := mantis.Response{
 		Body: []byte(`{}`),
 	}
-	return core.HandleResponseJSON(ctx, body.Byte(), mantisHttp.StatusOK)
+	return core.HandleResponseJSON(ctx, body.Byte(), mantis.StatusOK)
 }
 
-func nonMantisHandler(ctx *routing.Context) error {
-	return core.HandleResponseJSON(ctx, []byte(`{}`), mantisHttp.StatusOK)
+func nonMantisHandler(ctx App.Context) error {
+	return core.HandleResponseJSON(ctx, []byte(`{}`), mantis.StatusOK)
 }
