@@ -17,9 +17,14 @@ func main() {
 }
 
 func handler(ctx *core.Context) error {
+	output := `{
+		"user": {
+			"uuid": 3
+		}
+	}`
 	body := core.Res{
-		Body:       []byte(`{"x": 3}`),
-		BodyString: string("hello"),
+		Body:       []byte(output),
+		BodyString: "hello",
 	}
 	return core.HandleResponseJSON(ctx, body.Byte(), App.S.OK)
 }
