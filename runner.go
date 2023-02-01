@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/sphireinc/core/v1"
-	mantis "github.com/sphireinc/mantis/http"
 )
 
 var App = core.New()
@@ -17,13 +16,13 @@ func main() {
 	App.Run()
 }
 
-func handler(ctx App.Context) error {
-	body := mantis.Response{
+func handler(ctx *core.Context) error {
+	body := core.Res{
 		Body: []byte(`{}`),
 	}
-	return core.HandleResponseJSON(ctx, body.Byte(), mantis.StatusOK)
+	return core.HandleResponseJSON(ctx, body.Byte(), App.S.OK)
 }
 
-func nonMantisHandler(ctx App.Context) error {
-	return core.HandleResponseJSON(ctx, []byte(`{}`), mantis.StatusOK)
+func nonMantisHandler(ctx *core.Context) error {
+	return core.HandleResponseJSON(ctx, []byte(`{}`), App.S.OK)
 }

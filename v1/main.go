@@ -3,6 +3,7 @@ package core
 import (
 	"encoding/json"
 	routing "github.com/qiangxue/fasthttp-routing"
+	mantis "github.com/sphireinc/mantis/http"
 	"github.com/valyala/fasthttp"
 	"os"
 )
@@ -16,8 +17,11 @@ type Config struct {
 	Environment   Environment   `json:"environment"`
 	Persistence   Persistence   `json:"persistence"`
 	Communication Communication `json:"communication"`
-	Context       *routing.Context
+	S             mantis.Status
 }
+
+type Context = routing.Context
+type Res = mantis.Response
 
 // Load takes our Config object and loads our environment defined JSON config
 func (c *Config) Load() {
@@ -29,6 +33,9 @@ func (c *Config) Load() {
 	if err != nil {
 		panic("Error unmarshalling config file " + c.Environment.Location)
 	}
+
+	// Populate our statuses
+	c.S.Fill()
 }
 
 // Run loads routes and starts the Server.
