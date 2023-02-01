@@ -8,6 +8,25 @@ import (
 	"time"
 )
 
+func ResponseJson(ctx *Context, output string, status int, error string) error {
+	body := Res{
+		Body:       []byte(output),
+		BodyString: output,
+		Error:      errors.New(error),
+	}
+	ctx.SetContentType("application/json")
+	// Set session token and request ID if available
+	ctx.Response.Header.Set("X-Session-Token", HeaderFromCtx(ctx, "Session-Token"))
+	ctx.Response.Header.Set("X-Request-Id", HeaderFromCtx(ctx, "Request-Id"))
+
+	ctx.SetStatusCode(fasthttp.StatusOK)
+	if status != 200 {
+		ctx.SetStatusCode(status)
+	}
+	ctx.SetBody(body.Byte())
+	return nil
+}
+
 // HandleResponseJSON handles general responses via JSON.
 func HandleResponseJSON(ctx *Context, body []byte, status int) error {
 	ctx.SetContentType("application/json")
