@@ -38,8 +38,8 @@ That is all that is required.
 Routing in Core is simple. We create a function with this signature:
 
     func handler(ctx *routing.Context) error {
-        body := mantisHttp.Response{}
-        return core.HandleResponseJSON(ctx, body.Byte(), mantisHttp.StatusOK)
+        body := core.Res{}
+        return core.HandleResponseJSON(ctx, body.Byte(), App.S.OK)
     }
 
 Then, we add it to our `app` before calling `app.Run()`:
@@ -47,9 +47,7 @@ Then, we add it to our `app` before calling `app.Run()`:
     package main
     
     import (
-        routing "github.com/qiangxue/fasthttp-routing"
-        core "github.com/sphireinc/core/src"
-        mantisHttp "github.com/sphireinc/mantis/http"
+        core "github.com/sphireinc/core/v1"
     )
     
     var App = core.New()
@@ -59,16 +57,17 @@ Then, we add it to our `app` before calling `app.Run()`:
         App.Router.Get("/non-mantis-route", nonMantisHandler)
         App.Run()
     }
-    
-    func handler(ctx *routing.Context) error {
-        body := mantisHttp.Response{
-            Body: []byte(`{}`),
+
+    func handler(ctx *core.Context) error {
+        body := core.Res{
+            Body:       []byte(`{"x": 3}`),
+            BodyString: string("hello"),
         }
-        return core.HandleResponseJSON(ctx, body.Byte(), mantisHttp.StatusOK)
+        return core.HandleResponseJSON(ctx, body.Byte(), App.S.OK)
     }
 
-    func nonMantisHandler(ctx *routing.Context) error {
-        return core.HandleResponseJSON(ctx, []byte(`{}`), mantisHttp.StatusOK)
+    func nonMantisHandler(ctx *core.Context) error {
+        return core.HandleResponseJSON(ctx, []byte(`{}`), App.S.OK)
     }
 
 That is all there is to it. Things like MySQL and Redis are set up automatically

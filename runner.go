@@ -18,7 +18,8 @@ func main() {
 
 func handler(ctx *core.Context) error {
 	body := core.Res{
-		Body: []byte(`{}`),
+		Body:       []byte(`{"x": 3}`),
+		BodyString: string("hello"),
 	}
 	return core.HandleResponseJSON(ctx, body.Byte(), App.S.OK)
 }
