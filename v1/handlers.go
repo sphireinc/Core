@@ -2,7 +2,6 @@ package core
 
 import (
 	"errors"
-	routing "github.com/qiangxue/fasthttp-routing"
 	mantisHttp "github.com/sphireinc/mantis/http"
 	"github.com/valyala/fasthttp"
 	"strconv"
@@ -10,7 +9,7 @@ import (
 )
 
 // HandleResponseJSON handles general responses via JSON.
-func HandleResponseJSON(ctx *routing.Context, body []byte, status int) error {
+func HandleResponseJSON(ctx *Context, body []byte, status int) error {
 	ctx.SetContentType("application/json")
 
 	// Set session token and request ID if available
@@ -27,7 +26,7 @@ func HandleResponseJSON(ctx *routing.Context, body []byte, status int) error {
 }
 
 // NotFoundServer is the default 404 handler
-func NotFoundServer(ctx *routing.Context) error {
+func NotFoundServer(ctx *Context) error {
 	body := mantisHttp.Response{
 		Body:  []byte("404 Not Found: " + string(ctx.Request.RequestURI())),
 		Error: errors.New("404 Not Found"),
@@ -35,7 +34,7 @@ func NotFoundServer(ctx *routing.Context) error {
 	return HandleResponseJSON(ctx, body.Byte(), fasthttp.StatusNotFound)
 }
 
-func MethodNotAllowed(ctx *routing.Context) error {
+func MethodNotAllowed(ctx *Context) error {
 	body := mantisHttp.Response{
 		Body:  []byte("405 Method Not Allowed" + string(ctx.Request.RequestURI())),
 		Error: errors.New("405 Method Not Allowed"),
@@ -44,20 +43,20 @@ func MethodNotAllowed(ctx *routing.Context) error {
 }
 
 // Status simply returns a 200 OK
-func Status(ctx *routing.Context) error {
+func Status(ctx *Context) error {
 	body := mantisHttp.Response{Body: []byte("OK")}
 	return HandleResponseJSON(ctx, body.Byte(), fasthttp.StatusOK)
 }
 
 // TeaPot is a 418 handler easter egg
-func TeaPot(ctx *routing.Context) error {
+func TeaPot(ctx *Context) error {
 	ctx.Response.Header.Set("X-Teapot", "Chai")
 	body := mantisHttp.Response{Body: []byte("Are you a teapot?")}
 	return HandleResponseJSON(ctx, body.Byte(), fasthttp.StatusTeapot)
 }
 
 // HeaderFromCtx returns the requested header from the given fasthttp context
-func HeaderFromCtx(ctx *routing.Context, key string) string {
+func HeaderFromCtx(ctx *Context, key string) string {
 	return string(ctx.Request.Header.Peek(key))
 }
 

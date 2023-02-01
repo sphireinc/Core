@@ -3,6 +3,8 @@ module github.com/sphireinc/core
 go 1.18
 
 require (
+	github.com/gofiber/fiber/v2 v2.41.0
+	github.com/gofiber/storage/memory v0.0.0-20230131071208-04b2bc9d807c
 	github.com/qiangxue/fasthttp-routing v0.0.0-20160225050629-6ccdc2a18d87
 	github.com/sphireinc/mantis v1.5.3
 	github.com/valyala/fasthttp v1.44.0
@@ -26,12 +28,18 @@ require (
 	github.com/klauspost/compress v1.15.15 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
 	github.com/kr/text v0.2.0 // indirect
+	github.com/mattn/go-colorable v0.1.13 // indirect
+	github.com/mattn/go-isatty v0.0.17 // indirect
+	github.com/mattn/go-runewidth v0.0.14 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
+	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/rogpeppe/go-internal v1.9.0 // indirect
 	github.com/stretchr/testify v1.8.1 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
+	github.com/valyala/tcplisten v1.0.0 // indirect
 	github.com/yuin/gopher-lua v1.1.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
+	golang.org/x/sys v0.0.0-20220811171246-fbc7d0a398ab // indirect
 	gopkg.in/jmcvetta/napping.v3 v3.2.0 // indirect
 	gopkg.in/jmcvetta/neoism.v1 v1.3.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect

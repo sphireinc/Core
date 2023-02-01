@@ -9,14 +9,14 @@ import (
 )
 
 type Config struct {
-	Application   Application   `json:"application"`
-	Components    Components    `json:"components"`
-	Server        Server        `json:"server"`
-	Router        Router        `json:"router"`
-	Log           Log           `json:"log"`
-	Environment   Environment   `json:"environment"`
-	Persistence   Persistence   `json:"persistence"`
-	Communication Communication `json:"communication"`
+	Application   `json:"application"`
+	Components    `json:"components"`
+	Server        `json:"server"`
+	Router        `json:"router"`
+	Log           `json:"log"`
+	Environment   `json:"environment"`
+	Persistence   `json:"persistence"`
+	Communication `json:"communication"`
 	S             mantis.Status
 }
 

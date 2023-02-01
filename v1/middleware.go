@@ -2,11 +2,31 @@ package core
 
 import (
 	"fmt"
-	routing "github.com/qiangxue/fasthttp-routing"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/limiter"
+	"github.com/gofiber/storage/memory"
+	"time"
 )
 
+var Limiter = limiter.New(limiter.Config{
+	Next: func(c *fiber.Ctx) bool {
+		return c.IP() == "127.0.0.1"
+	},
+	Max:        20,
+	Expiration: 30 * time.Second,
+	KeyGenerator: func(c *fiber.Ctx) string {
+		return "key"
+	},
+	LimitReached: func(c *fiber.Ctx) error {
+		return c.SendFile("./fast.html")
+	},
+	Storage: memory.New(memory.Config{
+		GCInterval: 10 * time.Second,
+	}),
+})
+
 // BasicAuth checks for basic authentication parameters
-func BasicAuth(ctx *routing.Context) error {
+func BasicAuth(ctx *Context) error {
 	if string(ctx.Response.Header.Peek("Origin")) == "a" {
 
 	}
@@ -14,7 +34,7 @@ func BasicAuth(ctx *routing.Context) error {
 }
 
 // AdminOnly checks if a user is an admin.
-func AdminOnly(ctx *routing.Context) error {
+func AdminOnly(ctx *Context) error {
 	if string(ctx.Response.Header.Peek("Origin")) == "a" {
 
 	}
@@ -24,7 +44,7 @@ func AdminOnly(ctx *routing.Context) error {
 // LogRequest provides a log middleware which logs each request.
 //
 //	Forced middleware
-func LogRequest(ctx *routing.Context) error {
+func LogRequest(ctx *Context) error {
 	App.Log.Writer.Info(fmt.Sprintf("%s %s",
 		ctx.RequestCtx.RemoteAddr(),
 		ctx.Request.URI()))
@@ -33,7 +53,7 @@ func LogRequest(ctx *routing.Context) error {
 
 // BasicHeaders applies our general headers.
 // Forced middleware
-func BasicHeaders(ctx *routing.Context) error {
+func BasicHeaders(ctx *Context) error {
 	ctx.Response.Header.Set("Content-Type", "application/json")
 	ctx.Response.Header.Set("Accept", "*/*")
 	ctx.Response.Header.Set("Accept-Encoding", "gzip, compress, deflate, br")
