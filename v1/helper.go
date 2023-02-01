@@ -13,6 +13,10 @@ var (
 	MethodDelete = []string{"DELETE"}
 )
 
+func EmptyJson() map[string]interface{} {
+	return map[string]interface{}{}
+}
+
 func (c *Config) Methods() []string {
 	return []string{"GET,PUT,POST,DELETE"}
 }
