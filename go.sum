@@ -100,6 +100,8 @@ github.com/sphireinc/mantis v1.5.3 h1:Rrazuo/7ZVhfEhvar1KvwItVKaYN+wSbAlhSYOFtY7
 github.com/sphireinc/mantis v1.5.3/go.mod h1:tbyFHHOLjJ3F79B/6ffCNsN3bU4+l5a0wHL15MaVShA=
 github.com/sphireinc/mantis v1.5.4 h1:ezU+AbYhx4T/cx9ZXSiHQqjokEGpnNCcnmWdJPXfZDw=
 github.com/sphireinc/mantis v1.5.4/go.mod h1:tbyFHHOLjJ3F79B/6ffCNsN3bU4+l5a0wHL15MaVShA=
+github.com/sphireinc/mantis v1.5.5 h1:BWFA6J8Ee/XOfn/uaZ6Vb4Ibj84Ewo4KOzf+kNukp68=
+github.com/sphireinc/mantis v1.5.5/go.mod h1:tbyFHHOLjJ3F79B/6ffCNsN3bU4+l5a0wHL15MaVShA=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.4.0/go.mod h1:YvHI0jy2hoMjB+UWwv71VJQ9isScKT/TqJzVSSt89Yw=
 github.com/stretchr/objx v0.5.0/go.mod h1:Yh+to48EsGEfYuaHDzXPcE3xhTkx73EhmCGUpEOglKo=

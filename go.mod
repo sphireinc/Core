@@ -6,7 +6,7 @@ require (
 	github.com/gofiber/fiber/v2 v2.41.0
 	github.com/gofiber/storage/memory v0.0.0-20230131071208-04b2bc9d807c
 	github.com/qiangxue/fasthttp-routing v0.0.0-20160225050629-6ccdc2a18d87
-	github.com/sphireinc/mantis v1.5.4
+	github.com/sphireinc/mantis v1.5.5
 	github.com/valyala/fasthttp v1.44.0
 	github.com/victorspringer/http-cache v0.0.0-20221205073845-df6d061f29cb
 )
