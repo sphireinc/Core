@@ -2,6 +2,7 @@ package core
 
 import (
 	"encoding/json"
+	"github.com/go-echarts/statsview"
 	routing "github.com/qiangxue/fasthttp-routing"
 	mantis "github.com/sphireinc/mantis/http"
 	"github.com/valyala/fasthttp"
@@ -26,6 +27,12 @@ type Res = mantis.Response
 
 // Run loads routes and starts the Server.
 func (c *Config) Run() {
+	if c.Components.StatsView {
+		go func() {
+			_ = statsview.New().Start()
+		}()
+	}
+
 	// if c has no Address, default to localhost
 	if c.Server.Address == "" {
 		c.Server.Address = "127.0.0.1"

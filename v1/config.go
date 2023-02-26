@@ -27,6 +27,7 @@ type Components struct {
 	MySQL     bool `json:"mysql,omitempty"`
 	HTTPCache bool `json:"HTTPCache,omitempty"`
 	Log       bool `json:"log,omitempty"`
+	StatsView bool `json:"stats_view"`
 }
 
 type Server struct {

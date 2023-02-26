@@ -74,6 +74,12 @@ That is all there is to it. Things like MySQL and Redis are set up automatically
 when they find a configuration, and hang off of the `App` struct (like the Mantis logger).
 
 
+## Profiling / Stats View
+
+Core utilizes the StatsView package (github.com/go-echarts/statsview) to display a quick
+statistical view of memory usage etc. This can be viewed at `:18066/debug/statsview`
+
+
 ## To Do
 
 1. Implement FastWS (https://github.com/fasthttp/fastws)
