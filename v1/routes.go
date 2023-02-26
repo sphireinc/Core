@@ -10,17 +10,17 @@ func (r *Router) load() {
 	for _, route := range r.Routes {
 		switch route.Method {
 		case "GET":
-			r.Router.Get(route.URI, LogRequest, BasicHeaders, AdminOnly, BasicAuth, route.Handler)
+			r.Router.Get(route.URI, LogRequest, BasicHeaders, AdminOnly, BasicAuth, Limiter, route.Handler)
 		case "PUT":
-			r.Router.Put(route.URI, LogRequest, BasicHeaders, AdminOnly, BasicAuth, route.Handler)
+			r.Router.Put(route.URI, LogRequest, BasicHeaders, AdminOnly, BasicAuth, Limiter, route.Handler)
 		case "POST":
-			r.Router.Post(route.URI, LogRequest, BasicHeaders, AdminOnly, BasicAuth, route.Handler)
+			r.Router.Post(route.URI, LogRequest, BasicHeaders, AdminOnly, BasicAuth, Limiter, route.Handler)
 		case "PATCH":
-			r.Router.Patch(route.URI, LogRequest, BasicHeaders, AdminOnly, BasicAuth, route.Handler)
+			r.Router.Patch(route.URI, LogRequest, BasicHeaders, AdminOnly, BasicAuth, Limiter, route.Handler)
 		case "DELETE":
-			r.Router.Delete(route.URI, LogRequest, BasicHeaders, AdminOnly, BasicAuth, route.Handler)
+			r.Router.Delete(route.URI, LogRequest, BasicHeaders, AdminOnly, BasicAuth, Limiter, route.Handler)
 		case "OPTIONS":
-			r.Router.Options(route.URI, LogRequest, BasicHeaders, AdminOnly, BasicAuth, route.Handler)
+			r.Router.Options(route.URI, LogRequest, BasicHeaders, AdminOnly, BasicAuth, Limiter, route.Handler)
 		}
 	}
 }

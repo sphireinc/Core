@@ -3,6 +3,7 @@ package core
 import (
 	"fmt"
 	"github.com/qiangxue/fasthttp-routing"
+	mantisCache "github.com/sphireinc/mantis/cache"
 	mantisLog "github.com/sphireinc/mantis/log"
 	mantisUUID "github.com/sphireinc/mantis/uuid"
 	"os"
@@ -57,6 +58,8 @@ func (c *Config) Factory() {
 	ignite("MySQL", c.Components.MySQL, c.Persistence.MySQL.Connect)
 	ignite("BigCache", c.Components.BigCache, c.Persistence.BigCache.Init)
 	ignite("MemCache", c.Components.MemCache, c.Persistence.MemCache.Init)
+
+	c.Persistence.Memory = mantisCache.NewMemoryCache(100000, "30s")
 
 	// Initiate our Router
 	c.Router.Router = routing.New()

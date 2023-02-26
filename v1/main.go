@@ -12,6 +12,7 @@ type Config struct {
 	Application   `json:"application"`
 	Components    `json:"components"`
 	Server        `json:"server"`
+	Middleware    `json:"middleware"`
 	Router        `json:"router"`
 	Log           `json:"log"`
 	Environment   `json:"environment"`

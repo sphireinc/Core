@@ -1,29 +1,37 @@
 package core
 
 import (
+	"errors"
 	"fmt"
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/limiter"
-	"github.com/gofiber/storage/memory"
+	"strconv"
 	"time"
 )
 
-var Limiter = limiter.New(limiter.Config{
-	Next: func(c *fiber.Ctx) bool {
-		return c.IP() == "127.0.0.1"
-	},
-	Max:        20,
-	Expiration: 30 * time.Second,
-	KeyGenerator: func(c *fiber.Ctx) string {
-		return "key"
-	},
-	LimitReached: func(c *fiber.Ctx) error {
-		return c.SendFile("./fast.html")
-	},
-	Storage: memory.New(memory.Config{
-		GCInterval: 10 * time.Second,
-	}),
-})
+// Limiter creates a basic in-memory limiter
+func Limiter(ctx *Context) error {
+	val, ok := App.Persistence.Memory.Get(ctx.ConnID())
+
+	newVal := uint64(1)
+	if ok && val != nil {
+		newVal = val.(uint64) + uint64(1)
+	}
+
+	if App.Middleware.Limiter.Time == 0 {
+		App.Middleware.Limiter.Time = 5
+	}
+	newTime := time.Now().Add(time.Duration(App.Middleware.Limiter.Time))
+
+	if App.Middleware.Limiter.Max == 0 {
+		App.Middleware.Limiter.Max = 10
+	}
+
+	if newVal > uint64(App.Middleware.Limiter.Max) {
+		return errors.New("capacity limit reached id: " + strconv.FormatUint(ctx.ConnID(), 10))
+	}
+
+	App.Persistence.Memory.Set(ctx.ConnID(), newVal, newTime)
+	return nil
+}
 
 // BasicAuth checks for basic authentication parameters
 func BasicAuth(ctx *Context) error {

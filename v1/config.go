@@ -22,6 +22,7 @@ type Application struct {
 type Components struct {
 	BigCache  bool `json:"bigCache,omitempty"`
 	MemCache  bool `json:"memCache,omitempty"`
+	Memory    bool `json:"memory,omitempty"`
 	Redis     bool `json:"redis,omitempty"`
 	MySQL     bool `json:"mysql,omitempty"`
 	HTTPCache bool `json:"HTTPCache,omitempty"`
@@ -34,6 +35,14 @@ type Server struct {
 	WriteTimeout time.Duration `json:"writeTimeout,omitempty"`
 	ReadTimeout  time.Duration `json:"readTimeout,omitempty"`
 	MemCacheTime time.Duration `json:"memCacheTime,omitempty"`
+}
+
+type Middleware struct {
+	Limiter struct {
+		Enabled bool `json:"enabled"`
+		Time    int  `json:"time"`
+		Max     int  `json:"max"`
+	}
 }
 
 type Router struct {
@@ -63,6 +72,7 @@ type Environment struct {
 type Persistence struct {
 	BigCache mantisCache.BigCache `json:"bigCache"`
 	MemCache mantisCache.MemCache `json:"memCache"`
+	Memory   *mantisCache.Memory  `json:"memory"`
 	Redis    mantisDatabase.Redis `json:"redis"`
 	MySQL    mantisDatabase.MySQL `json:"mysql"`
 	Neo4j    mantisDatabase.Neo4j `json:"neo4J"`

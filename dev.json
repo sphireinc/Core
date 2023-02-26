@@ -18,6 +18,13 @@
     "readTimeout": 10,
     "memCacheTime": 10
   },
+  "middleware": {
+    "limiter": {
+      "enabled": true,
+      "time": 1,
+      "max": 60
+    }
+  },
   "router": {
     "routes": [
       {
