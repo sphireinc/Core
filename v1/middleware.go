@@ -35,17 +35,17 @@ func Limiter(ctx *Context) error {
 
 // BasicAuth checks for basic authentication parameters
 func BasicAuth(ctx *Context) error {
-	if string(ctx.Response.Header.Peek("Origin")) == "a" {
-
-	}
+	//if string(ctx.Response.Header.Peek("Origin")) == "a" {
+	//
+	//}
 	return nil
 }
 
 // AdminOnly checks if a user is an admin.
 func AdminOnly(ctx *Context) error {
-	if string(ctx.Response.Header.Peek("Origin")) == "a" {
-
-	}
+	//if string(ctx.Response.Header.Peek("Origin")) == "a" {
+	//
+	//}
 	return nil
 }
 
@@ -53,7 +53,7 @@ func AdminOnly(ctx *Context) error {
 //
 //	Forced middleware
 func LogRequest(ctx *Context) error {
-	App.Log.Writer.Info(fmt.Sprintf("%s %s",
+	defer App.Log.Writer.Info(fmt.Sprintf("%s %s",
 		ctx.RequestCtx.RemoteAddr(),
 		ctx.Request.URI()))
 	return nil
@@ -70,7 +70,10 @@ func BasicHeaders(ctx *Context) error {
 	ctx.Response.Header.Set("Cache-Control", "no-cache")
 	ctx.Response.Header.Set("Pragma", "no-cache")
 	ctx.Response.Header.Set("Upgrade-Insecure-Requests", "1")
-	ctx.Response.Header.Set("Server", "Core")
+
+	if App.Middleware.BasicHeaders.ShowServer {
+		ctx.Response.Header.Set("Server", "Core")
+	}
 
 	if origin := string(ctx.Response.Header.Peek("Origin")); origin != "" {
 		acAllowHeaders := "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"

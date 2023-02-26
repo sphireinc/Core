@@ -8,6 +8,7 @@ import (
 	"time"
 )
 
+// ResponseJson creates a body and returns a JSON response
 func ResponseJson(ctx *Context, output string, status int, error string) error {
 	body := Res{
 		Body:       []byte(output),
@@ -16,8 +17,14 @@ func ResponseJson(ctx *Context, output string, status int, error string) error {
 	}
 	ctx.SetContentType("application/json")
 	// Set session token and request ID if available
-	ctx.Response.Header.Set("X-Session-Token", HeaderFromCtx(ctx, "Session-Token"))
-	ctx.Response.Header.Set("X-Request-Id", HeaderFromCtx(ctx, "Request-Id"))
+
+	if App.Server.ResponseConfig.SessionToken {
+		ctx.Response.Header.Set("X-Session-Token", HeaderFromCtx(ctx, "Session-Token"))
+	}
+
+	if App.Server.ResponseConfig.RequestId {
+		ctx.Response.Header.Set("X-Request-Id", HeaderFromCtx(ctx, "Request-Id"))
+	}
 
 	ctx.SetStatusCode(fasthttp.StatusOK)
 	if status != 200 {
@@ -32,8 +39,12 @@ func HandleResponseJSON(ctx *Context, body []byte, status int) error {
 	ctx.SetContentType("application/json")
 
 	// Set session token and request ID if available
-	ctx.Response.Header.Set("X-Session-Token", HeaderFromCtx(ctx, "Session-Token"))
-	ctx.Response.Header.Set("X-Request-Id", HeaderFromCtx(ctx, "Request-Id"))
+	if App.Server.ResponseConfig.SessionToken {
+		ctx.Response.Header.Set("X-Session-Token", HeaderFromCtx(ctx, "Session-Token"))
+	}
+	if App.Server.ResponseConfig.RequestId {
+		ctx.Response.Header.Set("X-Request-Id", HeaderFromCtx(ctx, "Request-Id"))
+	}
 
 	ctx.SetStatusCode(fasthttp.StatusOK)
 	if status != 200 {

@@ -24,21 +24,6 @@ type Config struct {
 type Context = routing.Context
 type Res = mantis.Response
 
-// Load takes our Config object and loads our environment defined JSON config
-func (c *Config) Load() {
-	file, err := os.ReadFile(c.Environment.Location)
-	if err != nil {
-		panic("Cannot load config file " + c.Environment.Location)
-	}
-	err = json.Unmarshal([]byte(file), &c)
-	if err != nil {
-		panic("Error unmarshalling config file " + c.Environment.Location)
-	}
-
-	// Populate our statuses
-	c.S.Fill()
-}
-
 // Run loads routes and starts the Server.
 func (c *Config) Run() {
 	// if c has no Address, default to localhost
@@ -55,4 +40,19 @@ func (c *Config) Run() {
 	if err := fasthttp.ListenAndServe(":"+c.Server.Port, c.Router.Router.HandleRequest); err != nil {
 		c.Log.Writer.HandleFatalError(err)
 	}
+}
+
+// Load takes our Config object and loads our environment defined JSON config
+func (c *Config) Load() {
+	file, err := os.ReadFile(c.Environment.Location)
+	if err != nil {
+		panic("Cannot find config file " + c.Environment.Location)
+	}
+	err = json.Unmarshal([]byte(file), &c)
+	if err != nil {
+		panic("Error loading config file " + c.Environment.Location)
+	}
+
+	// Populate our statuses
+	c.S.Fill()
 }

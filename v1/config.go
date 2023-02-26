@@ -30,11 +30,17 @@ type Components struct {
 }
 
 type Server struct {
-	Address      string        `json:"address,omitempty"`
-	Port         string        `json:"port,omitempty"`
-	WriteTimeout time.Duration `json:"writeTimeout,omitempty"`
-	ReadTimeout  time.Duration `json:"readTimeout,omitempty"`
-	MemCacheTime time.Duration `json:"memCacheTime,omitempty"`
+	Address        string         `json:"address,omitempty"`
+	Port           string         `json:"port,omitempty"`
+	WriteTimeout   time.Duration  `json:"writeTimeout,omitempty"`
+	ReadTimeout    time.Duration  `json:"readTimeout,omitempty"`
+	MemCacheTime   time.Duration  `json:"memCacheTime,omitempty"`
+	ResponseConfig ResponseConfig `json:"response_config"`
+}
+
+type ResponseConfig struct {
+	RequestId    bool `json:"request_id"`
+	SessionToken bool `json:"session_token"`
 }
 
 type Middleware struct {
@@ -42,7 +48,20 @@ type Middleware struct {
 		Enabled bool `json:"enabled"`
 		Time    int  `json:"time"`
 		Max     int  `json:"max"`
-	}
+	} `json:"limiter"`
+	LogRequest struct {
+		Enabled bool `json:"enabled"`
+	} `json:"log_request"`
+	BasicHeaders struct {
+		Enabled    bool `json:"enabled"`
+		ShowServer bool `json:"show_server"`
+	} `json:"basic_headers"`
+	AdminOnly struct {
+		Enabled bool `json:"enabled"`
+	} `json:"admin_only"`
+	BasicAuth struct {
+		Enabled bool `json:"enabled"`
+	} `json:"basic_auth"`
 }
 
 type Router struct {

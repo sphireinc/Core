@@ -16,13 +16,30 @@
     "port": "8080",
     "writeTimeout": 10,
     "readTimeout": 10,
-    "memCacheTime": 10
+    "memCacheTime": 10,
+    "response_config": {
+      "request_id": true,
+      "session_token": true
+    }
   },
   "middleware": {
     "limiter": {
-      "enabled": true,
+      "enabled": false,
       "time": 1,
-      "max": 60
+      "max": 600
+    },
+    "log_request": {
+      "enabled": true
+    },
+    "basic_headers": {
+      "enabled": true,
+      "show_server": false
+    },
+    "admin_only": {
+      "enabled": false
+    },
+    "basic_auth": {
+      "enabled": false
     }
   },
   "router": {
