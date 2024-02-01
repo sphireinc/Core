@@ -19,11 +19,18 @@ func New() *Config {
 	if env == "" {
 		env = "dev"
 	}
+	configFile := env + ".json"
+
+	locations := configLocations()
+	configFile, err := findConfigFile(locations, configFile)
+	if err != nil {
+		configFile = "./config_example.json"
+	}
 
 	App = &Config{
 		Environment: Environment{
 			Environment: env,
-			Location:    env + ".json",
+			Location:    configFile,
 		},
 	}
 

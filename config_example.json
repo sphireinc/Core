@@ -1,0 +1,164 @@
+{
+  "application": {
+    "name": "",
+    "uuid": ""
+  },
+  "components": {
+    "bigCache": false,
+    "memCache": false,
+    "redis": false,
+    "mySQL": false,
+    "HTTPCache": false,
+    "log": true,
+    "stats_view": true
+  },
+  "server": {
+    "address": "127.0.0.1",
+    "port": "8080",
+    "writeTimeout": 10,
+    "readTimeout": 10,
+    "memCacheTime": 10,
+    "response_config": {
+      "request_id": true,
+      "session_token": true
+    }
+  },
+  "middleware": {
+    "limiter": {
+      "enabled": false,
+      "time": 1,
+      "max": 600
+    },
+    "log_request": {
+      "enabled": true
+    },
+    "basic_headers": {
+      "enabled": true,
+      "show_server": false
+    },
+    "admin_only": {
+      "enabled": false
+    },
+    "basic_auth": {
+      "enabled": false
+    }
+  },
+  "router": {
+    "routes": [
+      {
+        "name": "",
+        "method": "",
+        "uri": "",
+        "middlewares": [
+          ""
+        ]
+      }
+    ]
+  },
+  "log": {
+    "location": "/tmp/sphire.log",
+    "log": {
+      "filename": "",
+      "print_to_term": false,
+      "overwrite": true
+    }
+  },
+  "environment": {
+    "environment": "dev",
+    "location": ""
+  },
+  "persistence": {
+    "bigCache": {
+      "config": {
+        "shards": 2,
+        "lifeWindow": 20,
+        "cleanWindow": 20,
+        "maxEntriesInWindow": 1000,
+        "maxEntrySize": 256,
+        "verbose": false,
+        "hardMaxCacheSize": 256
+      }
+    },
+    "memCache": {
+      "capacity": 1000,
+      "refreshKey": "core",
+      "algorithm": "LRU",
+      "memCacheTime": 20
+    },
+    "redis": {
+      "options": {
+        "network": "",
+        "addr": "",
+        "username": "",
+        "password": "",
+        "maxRetries": 3,
+        "minRetryBackoff": 5,
+        "maxRetryBackoff": 10,
+        "dialTimeout": 10,
+        "readTimeout": 10,
+        "writeTimeout": 10,
+        "poolFIFO": false,
+        "poolSize": 1000,
+        "minIdleConns": 10,
+        "maxConnAge": 100,
+        "poolTimeout": 10,
+        "idleTimeout": 100,
+        "idleCheckFrequency": -1
+      }
+    },
+    "mysql": {
+      "config": {
+        "user": "",
+        "passwd": "",
+        "net": "",
+        "addr": "",
+        "dBName": "",
+        "params": {
+          "": ""
+        },
+        "collation": "",
+        "maxAllowedPacket": 10,
+        "serverPubKey": "",
+        "tLSConfig": "",
+        "timeout": 10,
+        "readTimeout": 10,
+        "writeTimeout": 10,
+        "allowAllFiles": false,
+        "allowCleartextPasswords": false,
+        "allowNativePasswords": false,
+        "allowOldPasswords": false,
+        "checkConnLiveness": false,
+        "clientFoundRows": false,
+        "columnsWithAlias": false,
+        "interpolateParams": false,
+        "multiStatements": false,
+        "parseTime": false,
+        "rejectReadOnly": false
+      }
+    },
+    "neo4J": {
+      "dsn": {
+        "scheme": "",
+        "opaque": "",
+        "user": {
+          "username": "",
+          "password": ""
+        },
+        "host": "",
+        "path": "",
+        "rawPath": "",
+        "forceQuery": false,
+        "rawQuery": "",
+        "fragment": "",
+        "rawFragment": ""
+      }
+    }
+  },
+  "communication": {
+    "email": {
+      "username": "",
+      "password": "",
+      "host": ""
+    }
+  }
+}
