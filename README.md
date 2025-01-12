@@ -3,7 +3,7 @@
 Core is a framework which allows for fast API prototyping. Based off of Fiber.
 
 <div align="center">
-    <img src="core_logo.jpg" width="400px"  alt="logo" />
+    <img src="core_logo.png" width="400px"  alt="logo" />
 </div>
 
 ## Setup
