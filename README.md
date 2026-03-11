@@ -1,92 +1,70 @@
 # Sphire Core
 
-Core is a framework which allows for fast API prototyping. Based off of Fiber.
+Core is a Go framework for fast API prototyping built on:
+- `fasthttp` (server)
+- `github.com/qiangxue/fasthttp-routing` (router)
 
 <div align="center">
-    <img src="core_logo.png" width="400px"  alt="logo" />
+  <img src="assets/core_logo.png" width="400px" alt="logo" />
 </div>
 
 ## Setup
 
-The (pun fully intended) *core* of Sphire Core is the `Config` struct. This is the entrypoint
-of the framework, and must be instantiated as follows:
+Core is configured via a JSON file loaded into the `Config` struct.
 
-    var App core.Config = core.New()
+### Environment variables
 
-Within `core.New()` (located in `factory.go`), we look at the `SPC_ENV` environment variable
-which must coincide with the configuration JSON filename. If `SPC_ENV` is set to `dev` for instance
-then the configuration JSON filename must be `dev.json`. By default, it uses `dev.json`. 
+- `SPC_ENV` (preferred): selects the config file `<env>.json` (default: `dev`)
+- `SPC_CONFIG` (preferred): absolute path to a config file (overrides `SPC_ENV`)
 
-Within `New()`, the `Load()` function is called, which loads our JSON configuration into
-the `Config` struct. It then proceeds to call `Factory()` which instantiates our enabled services.
+Backward compatible fallbacks are still accepted:
+- `SPK_ENV`
+- `SPK_CONFIG`
 
-It is then possible to simply run `App.Run()` to start listening on our designated address:port.
+### Minimal start
 
-The framework can run in the simple runner:
+```go
+package main
 
-    package main
-    
-    import (
-        core "github.com/sphireinc/core/v1"
-    )
+import (
+  "log"
+  core "github.com/sphireinc/core/v1"
+)
 
-    var App := core.New()
+func main() {
+  app, err := core.New()
+  if err != nil {
+    log.Fatal(err)
+  }
 
-    func main() {
-        App.Run()
-    }
+  if err := app.Run(); err != nil {
+    log.Fatal(err)
+  }
+}
+```
 
-That is all that is required.
+Example app code lives under `cmd/example/`
 
-## Routing
+### Routing
 
-Routing in Core is simple. We create a function with this signature:
+Handlers use this signature:
 
-    func handler(ctx *routing.Context) error {
-        body := core.Res{}
-        return core.HandleResponseJSON(ctx, body.Byte(), App.S.OK)
-    }
+```go
+func handler(ctx *core.Context) error {
+  return core.HandleResponseJSON(ctx, []byte(`{}`), 200)
+}
+```
 
-Then, we add it to our `app` before calling `app.Run()`:
+Register routes before Run():
 
-    package main
-    
-    import (
-        core "github.com/sphireinc/core/v1"
-    )
-    
-    var App = core.New()
-    
-    func main() {
-        App.Router.Get("/our-custom-route", handler)
-        App.Router.Get("/non-mantis-route", nonMantisHandler)
-        App.Run()
-    }
+```go
+app.Router.Get("/our-custom-route", handler)
+```
 
-    func handler(ctx *core.Context) error {
-        body := core.Res{
-            Body:       []byte(`{"x": 3}`),
-            BodyString: string("hello"),
-        }
-        return core.HandleResponseJSON(ctx, body.Byte(), App.S.OK)
-    }
+### Profiling / Stats View
 
-    func nonMantisHandler(ctx *core.Context) error {
-        return core.HandleResponseJSON(ctx, []byte(`{}`), App.S.OK)
-    }
+When enabled, Core uses github.com/go-echarts/statsview.
 
-That is all there is to it. Things like MySQL and Redis are set up automatically
-when they find a configuration, and hang off of the `App` struct (like the Mantis logger).
+### Default endpoint:
 
-
-## Profiling / Stats View
-
-Core utilizes the StatsView package (github.com/go-echarts/statsview) to display a quick
-statistical view of memory usage etc. This can be viewed at `:18066/debug/statsview`
-
-
-## To Do
-
-1. Implement FastWS (https://github.com/fasthttp/fastws)
-2. Implement Proper CORS, CSRF, Limiter, etc (https://github.com/gofiber/fiber/tree/master/middleware)
-3. Implement Goth (https://github.com/markbates/goth)
+- :18066/debug/statsview

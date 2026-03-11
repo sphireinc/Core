@@ -1,6 +1,6 @@
 module github.com/sphireinc/core
 
-go 1.22.3
+go 1.26.1
 
 require (
 	github.com/go-echarts/statsview v0.3.4
