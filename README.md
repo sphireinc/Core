@@ -1,5 +1,10 @@
 # Sphire Core
 
+[![Build and Test](https://github.com/sphireinc/Core/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/sphireinc/Core/actions/workflows/build-and-test.yml)
+[![Dependency Graph](https://github.com/sphireinc/Core/actions/workflows/dependabot/update-graph/badge.svg)](https://github.com/sphireinc/Core/actions/workflows/dependabot/update-graph)
+[![pre-release](https://github.com/sphireinc/Core/actions/workflows/pre-release.yml/badge.svg)](https://github.com/sphireinc/Core/actions/workflows/pre-release.yml)
+[![tagged-release](https://github.com/sphireinc/Core/actions/workflows/tagged-release.yml/badge.svg)](https://github.com/sphireinc/Core/actions/workflows/tagged-release.yml)
+
 Core is a Go framework for fast API prototyping built on:
 - `fasthttp` (server)
 - `github.com/qiangxue/fasthttp-routing` (router)
