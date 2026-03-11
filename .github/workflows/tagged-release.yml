@@ -1,20 +1,45 @@
-name: "tagged-release"
+name: tagged-release
 
 on:
   push:
     tags:
       - "v*"
 
+permissions:
+  contents: write
+
 jobs:
   tagged-release:
-    name: "Tagged Release"
-    runs-on: "ubuntu-latest"
+    name: Build and Release
+    runs-on: ubuntu-latest
 
     steps:
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Go from go.mod
+        uses: actions/setup-go@v5
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          prerelease: false
+          go-version-file: go.mod
+          cache: true
+
+      - name: Run tests
+        run: go test ./...
+
+      - name: Build release artifacts
+        run: |
+          mkdir -p dist
+
+          GOOS=linux   GOARCH=amd64 go build -ldflags "-X github.com/sphireinc/core/v1.Version=${GITHUB_REF_NAME}" -o dist/core-linux-amd64   ./cmd/example
+          GOOS=darwin  GOARCH=arm64 go build -ldflags "-X github.com/sphireinc/core/v1.Version=${GITHUB_REF_NAME}" -o dist/core-darwin-arm64  ./cmd/example
+          GOOS=windows GOARCH=amd64 go build -ldflags "-X github.com/sphireinc/core/v1.Version=${GITHUB_REF_NAME}" -o dist/core-windows-amd64.exe ./cmd/example
+
+      - name: Create GitHub release and upload assets
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
           files: |
             LICENSE.txt
-            *.jar
+            dist/core-linux-amd64
+            dist/core-darwin-arm64
+            dist/core-windows-amd64.exe
